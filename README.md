@@ -121,7 +121,3 @@ Copyright (C) 2025 @ Biophotonics Laboratory, Caltech.
 
 The code is licensed under the GPL-v3.0 license.
 
-## BiBTeX
-```
-```
-
