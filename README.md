@@ -30,8 +30,8 @@ Top-level folder structure:
 - [Data source](#data-source)
 - [Usage](#usage)
 - [Contact](#contact)
-- [Copyright](#copyright)
 - [BiBTeX](#bibtex)
+- [Copyright](#copyright)
 
 ## Introduction
 AFP is an analytic technique used for refractive index tomography of weakly scattering samples. It retrieves the aberration function of an imaging system and extends the Fourier spectrum into the darkfield regime, both analytically, under the assumption of a finite sample thickness (FST) prior. By incorporating this prior, AFP transforms the inverse scattering problem into a linear problem, enabling more robust and efficient reconstruction of the refractive index distribution, without any paramter tuning or iterative optimizations. 
@@ -116,7 +116,7 @@ is treated to be approximately the same as the spectrum at $k_z$. If given as in
 ## Contact
 For any questions or comments about this code, please contact [zdong@caltech.edu](mailto:zdong@caltech.edu) or [rcao@alumni.caltech.edu](mailto:rcao@alumni.caltech.edu)
 
-## BibiTex
+## BiBTex
 ```
 @misc{dong2025analyticfourierptychotomographyvolumetric,
       title={Analytic Fourier ptychotomography for volumetric refractive index imaging}, 
