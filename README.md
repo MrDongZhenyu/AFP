@@ -6,7 +6,7 @@ This repository contains the codes and example data for Analytic Fourier Ptychot
 
 Paper link: 
 
-arXiv: 
+arXiv: https://arxiv.org/abs/2504.16247
 
 Project page:
 
@@ -115,6 +115,19 @@ is treated to be approximately the same as the spectrum at $k_z$. If given as in
 
 ## Contact
 For any questions or comments about this code, please contact [zdong@caltech.edu](mailto:zdong@caltech.edu) or [rcao@alumni.caltech.edu](mailto:rcao@alumni.caltech.edu)
+
+## BibiTex
+```
+@misc{dong2025analyticfourierptychotomographyvolumetric,
+      title={Analytic Fourier ptychotomography for volumetric refractive index imaging}, 
+      author={Zhenyu Dong and Haowen Zhou and Ruizhi Cao and Oumeng Zhang and Shi Zhao and Panlang Lyu and Reinaldo Alcalde and Changhuei Yang},
+      year={2025},
+      eprint={2504.16247},
+      archivePrefix={arXiv},
+      primaryClass={physics.optics},
+      url={https://arxiv.org/abs/2504.16247}, 
+}
+```
 
 ## Copyright
 Copyright (C) 2025 @ Biophotonics Laboratory, Caltech.
