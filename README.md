@@ -8,7 +8,7 @@ Paper link:
 
 arXiv: https://arxiv.org/abs/2504.16247
 
-Project page:
+Project page: https://mrdongzhenyu.github.io/AFP-Web/
 
 Data source: https://osf.io/f7tqa/
 
