@@ -2,7 +2,6 @@
 
 This repository contains the codes and example data for Analytic Fourier Ptychotomography (AFP), a technique used for volumetric refractive index imaging. It includes both the simulation and reconstruction codes. 
 
-**Note:** Part of the codes are temporarily encrypted and will be fully released upon publication of the paper. The provided demos still work as expected.
 
 Paper link: 
 
