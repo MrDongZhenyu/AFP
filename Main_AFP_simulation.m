@@ -3,11 +3,11 @@
 % Written by Ruizhi Cao, Zhenyu Dong, and Haowen Zhou
 % @ Caltech Biophotonics Laboratory | http://biophot.caltech.edu/
 % The source code is licensed under GPL-3. 
-% Version: March, 15th, 2025
+% Version: October, 29th, 2025
 %
-% Reference:
-% Project Page:
-% GitHub Repo:
+% Reference: https://arxiv.org/abs/2504.16247
+% Project Page: https://mrdongzhenyu.github.io/AFP-Web/
+% GitHub Repo: https://github.com/MrDongZhenyu/AFP
 % 
 %
 % Organization of the code:
@@ -73,7 +73,6 @@ pixelSizeXY = ps;         % unit: um. Effective pixel size (lateral)
 pixelSizeZ  = ps;         % unit: um. Allows uneven 3D grid, i.e. pixelSizeZ can be different from pixelSizeXY
 NA          = 0.4;        % numerical aperture (NA) of the imaging system
 lambda      = 532;        % unit: nm. wavelength of the illumination light
-
 
 %% ------------------------------------------------------------------------
 % Step 1: Set imaging system and reconstruction parameters
@@ -479,9 +478,11 @@ subplot(224); imshow(frame.cdata,[]); axis equal; axis tight; title([title_temp,
 if saveResults
     if useAbeCorrection
         CTF_abe = CTF_abe.*(abs(CTF_abe)>10^-2);
+        ACName = 'withAC';
     else
         CTF_abe = CTF;
         zernikeCoeff = [];
+        ACName = 'withoutAC';
     end
     
     saveDir = 'Result_simulation';
@@ -490,10 +491,10 @@ if saveResults
     end
    
     if useDarkfield
-        file_name = fullfile(saveDir,[char(sampleName),'_AFP_simulation_',char(approxMethod),'_','Darkfield','.mat']);
+        file_name = fullfile(saveDir,[char(sampleName),'_AFP_simulation_',char(approxMethod),'_',ACName,'_','Darkfield','.mat']);
         save(file_name,'RIGT_pad_LP_fullfield','RI_3D_fullfield','RIGT_pad_LP','RI_3D','CTF_abe','CTF_GT','zernikeCoeff','zernikeGT','-v7.3');
     else
-        file_name = fullfile(saveDir,[char(sampleName),'_AFP_simulation_',char(approxMethod),'_','NAmatching','.mat']);
+        file_name = fullfile(saveDir,[char(sampleName),'_AFP_simulation_',char(approxMethod),'_',ACName,'_','NAmatching','.mat']);
         save(file_name,'RIGT_pad_LP','RI_3D','CTF_abe','CTF_GT','zernikeCoeff','zernikeGT','-v7.3');
     end
 end

@@ -3,11 +3,11 @@
 % Written by Zhenyu Dong, Haowen Zhou and Ruizhi Cao
 % @ Caltech Biophotonics Laboratory | http://biophot.caltech.edu/
 % The source code is licensed under GPL-3. 
-% Version: March, 20th, 2025
+% Version: October, 29th, 2025
 %
-% Reference:
-% Project Page:
-% GitHub Repo:
+% Reference: https://arxiv.org/abs/2504.16247
+% Project Page: https://mrdongzhenyu.github.io/AFP-Web/
+% GitHub Repo: https://github.com/MrDongZhenyu/AFP
 % 
 % Organization of the code (Steps):
 % 1. Set reconstruction parameters and options
@@ -75,7 +75,7 @@ saveResults         = true;     % whether to save the reconstruction results
 useGPU              = true;     % whether to use GPU for reconstruction 
                                 % (automatic set to false if no GPU is available)
 useDarkfield        = true;     % whether to use darkfield reconstruction
-enableROI           = false;    % whether to select a specific ROI for reconstruction 
+enableROI           = true;    % whether to select a specific ROI for reconstruction 
                                 % (set to false for all the example data)
 
 if gpuDeviceCount("available") == 0
@@ -115,11 +115,12 @@ if enableROI
     ROISize = input(['Enter your ROI size, maximum value is ',num2str(min(size(imStack,1),size(imStack,2))),' : ']);
     I_sum = sum(double(imStack(:,:,1:nNAmatching)),3);
     fig = figure('Name','Incoherent image'); imshow(I_sum,[]);
-    h = imrect(gca,[10 10 ROISize ROISize]);
+    h = imrect(gca,[round((size(imStack,1)-ROISize)/2)+1 round((size(imStack,2)-ROISize)/2)+1 ROISize ROISize]); % Automatic set to center
     position = wait(h);
     position = round(position);
     close(fig);
     imStack = imStack(position(2):position(2)+position(4)-1,position(1):position(1)+position(3)-1,:);
+    p.ROI = position;
 end
 
 imStack = double(imStack);
@@ -417,9 +418,11 @@ if saveResults
 
     if useAbeCorrection
         CTF_abe = CTF_abe.*(abs(CTF_abe)>10^-2);
+        ACName = 'withAC';
     else
         CTF_abe = CTF;
         zernikeCoeff = [];
+        ACName = 'withoutAC';
     end
 
     saveDir = 'Result_experiment';
@@ -428,13 +431,13 @@ if saveResults
     end
    
     if useDarkfield
-        file_name = fullfile(saveDir,[dataName(find(dataName == '_', 1) + 1:end),'_AFP_experiment_',char(approxMethod),'_','Darkfield','.mat']);
+        file_name = fullfile(saveDir,[dataName(find(dataName == '_', 1) + 1:end),'_AFP_experiment_',char(approxMethod),'_',ACName,'_','Darkfield','.mat']);
         save(file_name,'RI_3D_fullfield','RI_3D','CTF_abe','zernikeCoeff','p','-v7.3');
     elseif useAbsorption
-        file_name = fullfile(saveDir,[dataName(find(dataName == '_', 1) + 1:end),'_AFP_experiment_',char(approxMethod),'_','NAmatching','.mat']);
+        file_name = fullfile(saveDir,[dataName(find(dataName == '_', 1) + 1:end),'_AFP_experiment_',char(approxMethod),'_',ACName,'_','NAmatching','.mat']);
         save(file_name,'RI_3D','imStack_ICNAMatch','CTF_abe','zernikeCoeff','p','-v7.3');
     else
-        file_name = fullfile(saveDir,[dataName(find(dataName == '_', 1) + 1:end),'_AFP_experiment_',char(approxMethod),'_','NAmatching','.mat']);
+        file_name = fullfile(saveDir,[dataName(find(dataName == '_', 1) + 1:end),'_AFP_experiment_',char(approxMethod),'_',ACName,'_','NAmatching','.mat']);
         save(file_name,'RI_3D','CTF_abe','zernikeCoeff','p','-v7.3');
     end
 end
